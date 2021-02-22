@@ -13,6 +13,12 @@
         <style>
             body {
                 background-color: floralwhite;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Chrome/Safari/Opera */
+                -khtml-user-select: none; /* Konqueror */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently not supported by any browser */
             }
             .panio-div {
                 height: calc(98vh);
@@ -46,7 +52,7 @@
             }
         </style>
     </head>
-    <body>
+    <body οncοntextmenu=self.event.returnValue=false onselectstart="return false">
         <div class='panio-div'>
             <div class="panio-taps">
                 <span onclick="btn_do(1)">1</span>
@@ -128,6 +134,9 @@
             document.addEventListener('keyup', (e) => {
                 btn_do(e.key)
             })
+            document.oncontextmenu =() => {
+				return false
+			}
         </script>
     </body>
 </html>
