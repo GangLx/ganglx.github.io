@@ -7,18 +7,16 @@
         <meta name="x5-fullscreen" content="true">
         <meta name="x5-page-mode" content="app">
         <meta name="browsermode" content="application">
-        <!-- <meta name="x5-orientation" content="portrait"> -->
-        <!-- <meta name="screen-orientation" content="portrait"> -->
-        <title>小钢琴</title>
+        <title>Panio</title>
         <style>
             body {
                 background-color: floralwhite;
-                -webkit-touch-callout: none; /* iOS Safari */
-                -webkit-user-select: none; /* Chrome/Safari/Opera */
-                -khtml-user-select: none; /* Konqueror */
-                -moz-user-select: none; /* Firefox */
-                -ms-user-select: none; /* Internet Explorer/Edge */
-                user-select: none; /* Non-prefixed version, currently not supported by any browser */
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
             }
             .panio-div {
                 height: calc(98vh);
@@ -52,7 +50,7 @@
             }
         </style>
     </head>
-    <body οncοntextmenu=self.event.returnValue=false onselectstart="return false">
+    <body οncοntextmenu="return false" onselectstart="return false" οndragstart="return false" οncοpy="return false" oncut="return false;">
         <div class='panio-div'>
             <div class="panio-taps">
                 <span onclick="btn_do(1)">1</span>
@@ -67,13 +65,12 @@
         </div>
         <script>
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-            function btn_do(value) {
+            const btn_do = (value) => {
                 tapSpan(value)
                 let gain = audioCtx.createGain()
                 let osc = audioCtx.createOscillator()
                 osc.type = 'sine'
                 osc.frequency.value = getFrequency(value) 
-                //osc.frequency.setValueAtTime(getFrequency(value), audioCtx.currentTime)
                 osc.connect(gain)
                 gain.connect(audioCtx.destination)
                 gain.gain.value = 1
@@ -83,7 +80,7 @@
                 gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1)
             }
             
-            function tapSpan(value) {
+            const tapSpan = (value) => {
                 const spanDivs = document.querySelectorAll('.panio-taps span')
                 spanDivs.forEach((s, i) => {
                     s.className = ''
@@ -97,7 +94,7 @@
                 })
             }
             
-            function getFrequency(value) {
+            const getFrequency = (value) => {
                 let frequency = 262
                 value = parseInt(value)
                 switch(value) {
@@ -135,6 +132,10 @@
                 btn_do(e.key)
             })
             document.oncontextmenu =() => {
+                return false
+            }
+            window.ontouchstart = (e) => {
+                e.preventDefault()
                 return false
             }
         </script>
