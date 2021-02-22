@@ -12,13 +12,12 @@
         <title>Panio</title>
         <style>
             .panio-div {
-                position: absolute;
-                top: 30px;
+                display: inline-block;
             }
             .panio-div span {
                 width: 300px;
-                height: 75px;
-                line-height: 75px;
+                height: 72px;
+                line-height: 72px;
                 background-color: white;
                 display: block;
                 border: 2px black solid;
@@ -32,18 +31,26 @@
             .panio-div .clickSpan {
                 background-color: lightgray;
             }
+            .parent {
+                height: calc(95vh);
+                display: table-cell;
+                text-align: center;
+                vertical-align: middle;
+            }
         </style>
     </head>
     <body>
-        <div class="panio-div">
-            <span onclick="btn_do(1)">1</span>
-            <span onclick="btn_do(2)">2</span>
-            <span onclick="btn_do(3)">3</span>
-            <span onclick="btn_do(4)">4</span>
-            <span onclick="btn_do(5)">5</span>
-            <span onclick="btn_do(6)">6</span>
-            <span onclick="btn_do(7)">7</span>
-            <span onclick="btn_do(8)">1</span>
+        <div class='parent'>
+            <div class="panio-div">
+                <span onclick="btn_do(1)">1</span>
+                <span onclick="btn_do(2)">2</span>
+                <span onclick="btn_do(3)">3</span>
+                <span onclick="btn_do(4)">4</span>
+                <span onclick="btn_do(5)">5</span>
+                <span onclick="btn_do(6)">6</span>
+                <span onclick="btn_do(7)">7</span>
+                <span onclick="btn_do(8)">1</span>
+            </div>
         </div>
         <script>
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
