@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <meta name="apple-mobile-web-app-capable" content="yes" /> 
         <meta name="full-screen" content="yes">
         <meta name="x5-fullscreen" content="true">
@@ -48,6 +48,21 @@
             .panio-taps .clickSpan {
                 background-color: lightgray;
             }
+            .full-screen-btn {
+                display: inline-block;
+                width: 30px;
+                height: 100px;
+                line-height: 30px;
+                border: 1px lightgray solid;
+                text-align: center;
+                writing-mode: vertical-lr;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: smaller;
+            }
+            .exit-full-screen-btn {
+                height: 120px;
+            }
         </style>
     </head>
     <body οncοntextmenu="return false" onselectstart="return false" οndragstart="return false" οncοpy="return false" oncut="return false;">
@@ -62,8 +77,26 @@
                 <span onclick="btn_do(7)">7</span>
                 <span onclick="btn_do(8)">1</span>
             </div>
+            <span class='full-screen-btn' onclick='fullScreen()'>Full Screen</span>
+            <span class='full-screen-btn exit-full-screen-btn' onclick='exitFullScreen()' style='display: none'>Exit Full Screen</span>
         </div>
         <script>
+            const fullScreen = (e) => {
+                document.documentElement.RequestFullScreen && document.documentElement.RequestFullScreen()
+                document.documentElement.mozRequestFullScreen && document.documentElement.mozRequestFullScreen()
+                document.documentElement.webkitRequestFullScreen && document.documentElement.webkitRequestFullScreen()
+                document.documentElement.msRequestFullscreen && document.documentElement.msRequestFullscreen()
+                document.querySelector('.exit-full-screen-btn').style.display = 'inline-block'
+                document.querySelector('.full-screen-btn').style.display = 'none'
+            }
+            const exitFullScreen = () => {
+                document.exitFullScreen && document.exitFullScreen()
+                document.mozExitFullScreen && document.mozExitFullScreen()
+                document.webkitExitFullscreen && document.webkitExitFullscreen()
+                document.msExitFullscreen && document.msExitFullscreen()
+                document.querySelector('.full-screen-btn').style.display = 'inline-block'
+                document.querySelector('.exit-full-screen-btn').style.display = 'none'
+            }
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
             const btn_do = (value) => {
                 tapSpan(value)
